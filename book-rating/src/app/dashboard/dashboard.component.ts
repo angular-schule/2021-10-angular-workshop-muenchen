@@ -8,6 +8,7 @@ import { Book } from '../shared/book';
 })
 export class DashboardComponent implements OnInit {
 
+  /** This is the book list */
   books: Book[] = [];
 
   constructor() {
