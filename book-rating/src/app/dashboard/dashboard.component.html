@@ -1,3 +1,13 @@
 <br-book
   *ngFor="let b of books"
   [book]="b"></br-book>
+
+<p>
+  <ng-container *ngIf="books.length === 0; else hasBooksTpl">
+    Keine Bücher vorhanden!
+  </ng-container>
+
+  <ng-template #hasBooksTpl>
+    <strong>Anzahl Bücher:</strong> {{ books.length }}
+  </ng-template>
+</p>
