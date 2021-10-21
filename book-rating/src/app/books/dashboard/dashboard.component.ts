@@ -12,6 +12,9 @@ export class DashboardComponent implements OnInit {
   /** This is the book list */
   books: Book[] = [];
 
+  MAX_RATING = this.rs.MAX_RATING;
+  MIN_RATING = this.rs.MIN_RATING;
+
   constructor(private rs: BookRatingService) {
     this.books = [
       {

@@ -16,10 +16,10 @@
 
     <button type="button"
       class="btn btn-success mr-2"
-      (click)="doRateUp()"> + </button>
+      (click)="doRateUp()" [disabled]="book.rating >= max"> + </button>
 
       <button type="button"
         class="btn btn-danger mr-2"
-        (click)="doRateDown()"> – </button>
+        (click)="doRateDown()" [disabled]="book.rating <= min"> – </button>
   </div>
 </div>

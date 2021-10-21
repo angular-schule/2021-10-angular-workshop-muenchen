@@ -20,6 +20,8 @@ export class BookComponent implements OnInit {
   @Output() rateDown = new EventEmitter<Book>();
 
   @Input() book?: Book;
+  @Input() min = 0;
+  @Input() max = 7;
 
   constructor() {}
 
