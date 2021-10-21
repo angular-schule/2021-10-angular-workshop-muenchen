@@ -1,3 +1,5 @@
+{{ time }}
+
 <div class="card mb-4" *ngIf="book">
   <div class="card-body bg-light">
       <img class="img-thumbnail float-right"
@@ -23,3 +25,5 @@
         (click)="doRateDown()" [disabled]="book.rating <= min"> – </button>
   </div>
 </div>
+
+{{ log() }}

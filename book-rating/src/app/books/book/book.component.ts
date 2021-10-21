@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Book } from '../shared/book';
 
 /**
@@ -12,7 +12,8 @@ import { Book } from '../shared/book';
 @Component({
   selector: 'br-book',
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.scss']
+  styleUrls: ['./book.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookComponent implements OnInit {
 
@@ -24,6 +25,11 @@ export class BookComponent implements OnInit {
   @Input() max = 7;
 
   constructor() {}
+
+  get time() {
+    // dadurch wird ExpressionChangedAfterItHasBeenCheckedError getriggert!
+    return Date.now();
+  }
 
   ngOnInit(): void {}
 
@@ -37,6 +43,10 @@ export class BookComponent implements OnInit {
 
   doRateDown() {
     this.rateDown.emit(this.book);
+  }
+
+  log() {
+    console.log('CD', Date.now());
   }
 
 }
