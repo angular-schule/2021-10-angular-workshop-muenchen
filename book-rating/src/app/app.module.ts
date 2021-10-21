@@ -14,7 +14,10 @@ import { BooksModule } from './books/books.module';
     BrowserModule,
     AppRoutingModule,
     BooksModule,
-    HttpClientModule // nur einmalig einbinden im Root der App
+    HttpClientModule, // nur einmalig einbinden im Root der App
+
+    // immer als letztes:
+    // RouterModule.forChild([{ path: '**', component: NotFoundComponent }])
   ],
   providers: [],
   bootstrap: [AppComponent]
