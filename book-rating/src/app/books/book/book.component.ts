@@ -13,7 +13,7 @@ import { Book } from '../shared/book';
   selector: 'br-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookComponent implements OnInit {
 
@@ -25,11 +25,6 @@ export class BookComponent implements OnInit {
   @Input() max = 7;
 
   constructor() {}
-
-  get time() {
-    // dadurch wird ExpressionChangedAfterItHasBeenCheckedError getriggert!
-    return Date.now();
-  }
 
   ngOnInit(): void {}
 
