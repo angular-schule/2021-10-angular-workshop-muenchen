@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { Book } from './book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookStoreService {
+  private myApiUrl = environment.apiUrl;
 
   private apiUrl = 'https://api.angular.schule';
 
