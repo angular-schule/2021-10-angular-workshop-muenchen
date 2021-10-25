@@ -23,7 +23,45 @@ export class CreatingComponent {
 
     /******************************/
 
-    
+    function producer(o: any) {
+      o.next(Math.random());
+
+      setTimeout(() => {
+        o.next(2);
+      }, 2000);
+
+      setTimeout(() => {
+        o.complete();
+      }, 3000)
+    }
+    const myObservable$ = new Observable(producer);
+
+    //////////
+
+    const obs = {
+      next: (value: any) => console.log(value),
+      // error: (err: any) => console.error(err),
+      complete: () => console.log('Complete')
+    };
+    // producer(obs);
+
+    // myObservable$.subscribe(obs);
+
+
+    /*
+    // so KÖNNTE die Klasse Observable implementiert sein
+    class Observable {
+      constructor(private producer) {}
+
+      subscribe(obs) {
+        const subscriber = this.sanitizeObserver(obs)
+        this.producer(subscriber);
+      }
+    }
+    */
+
+
+
     /******************************/
   }
 
