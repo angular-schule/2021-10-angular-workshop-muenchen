@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Book } from '../shared/book';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'br-book-create',
@@ -10,7 +13,7 @@ export class BookCreateComponent implements OnInit {
 
   bookForm: FormGroup;
 
-  constructor() {
+  constructor(private bs: BookStoreService, private router: Router) {
     this.bookForm = new FormGroup({
       isbn: new FormControl('', [
         Validators.required,
@@ -24,6 +27,7 @@ export class BookCreateComponent implements OnInit {
         Validators.max(5),
       ]),
       price: new FormControl(0, Validators.min(1)),
+
     });
   }
 
@@ -40,12 +44,26 @@ export class BookCreateComponent implements OnInit {
     return !!control && control.hasError(errorCode) && control.touched;
   }
 
+  submitForm() {
+    if (this.bookForm.invalid) {
+      this.bookForm.markAllAsTouched();
+      return;
+    }
+
+    const formValue: Book = this.bookForm.value;
+
+    this.bs.create(formValue).subscribe(book => {
+      this.router.navigate(['/books', book.isbn]); // [routerLink]="['/books', book.isbn]"
+      // this.router.navigateByUrl('/books'); // routerLink="/books"
+    });
+  }
+
 }
 
 /*
 TODO
 - Validierung ✅
-- Fehlermeldung
+- Fehlermeldung ✅
 - Buttons: Abschicken, (Reset)
 - nur abschicken, wenn gültig
 - HTTP
