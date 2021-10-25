@@ -23,16 +23,32 @@ export class CreatingComponent {
 
     /******************************/
 
+    timer(200, 1000).pipe(
+      map(e => e * 3),
+      filter(e => e % 2 === 0)
+    ).subscribe({
+      next: e => this.log(e),
+      error: err => this.log('ERROR ' + err),
+      complete: () => this.log('COMPLETE')
+    });
+
+
+
+    /******************************/
+
     function producer(o: any) {
       o.next(Math.random());
+      o.next(2);
+      o.next(3);
+      o.complete();
 
-      setTimeout(() => {
+      /*setTimeout(() => {
         o.next(2);
       }, 2000);
 
       setTimeout(() => {
         o.complete();
-      }, 3000)
+      }, 3000)*/
     }
     const myObservable$ = new Observable(producer);
 
@@ -40,7 +56,7 @@ export class CreatingComponent {
 
     const obs = {
       next: (value: any) => console.log(value),
-      // error: (err: any) => console.error(err),
+      error: (err: any) => console.error(err),
       complete: () => console.log('Complete')
     };
     // producer(obs);
@@ -51,7 +67,7 @@ export class CreatingComponent {
     /*
     // so KÖNNTE die Klasse Observable implementiert sein
     class Observable {
-      constructor(private producer) {}
+      constructor(private producer: any) {}
 
       subscribe(obs) {
         const subscriber = this.sanitizeObserver(obs)
