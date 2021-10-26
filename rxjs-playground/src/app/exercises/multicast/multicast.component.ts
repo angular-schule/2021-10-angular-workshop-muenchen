@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject, BehaviorSubject, ReplaySubject, Observable } from 'rxjs';
+import { Subject, BehaviorSubject, ReplaySubject, Observable, timer } from 'rxjs';
 import { share } from 'rxjs/operators';
 
 import { MeasureValuesService } from './measure-values.service';
@@ -14,11 +14,20 @@ export class MulticastComponent {
   listeners: string[] = [];
   logStream$ = new ReplaySubject<string>();
 
-  measureValues$: Observable<number>; // später: Subject<number>;
+  measureValues$: Subject<number>;
 
   constructor(private mvs: MeasureValuesService, private es: ExerciseService) {
     /**************!!**************/
-    this.measureValues$ = this.mvs.getValues();
+
+    // share: kaltes Observable heiß machen
+    // this.measureValues$ = this.mvs.getValues().pipe(shareReplay(1));
+    // shareReplay ist ab RxJS 7 deprecated!
+
+    this.measureValues$ = new ReplaySubject(3);
+    this.mvs.getValues().subscribe(this.measureValues$);
+
+
+
     /**************!!**************/
 
   }
