@@ -18,10 +18,12 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserModule,
     AppRoutingModule,
     // BooksModule, // auskommentiert wegen Lazy Loading
-    HttpClientModule,
+    HttpClientModule, // nur einmalig einbinden im Root der App
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]), // nur einmalig einbinden im Root der App
+    EffectsModule.forRoot([]),
+
+
 
     // immer als letztes:
     // RouterModule.forChild([{ path: '**', component: NotFoundComponent }])
