@@ -37,7 +37,6 @@ export class UnsubscribeComponent implements OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
 
-
     this.logStream$.next('DESTROY');
   }
 
